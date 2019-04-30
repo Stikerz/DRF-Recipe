@@ -12,9 +12,9 @@
 
 ## Endpoints
 - Create : /api/recipes/create/ 
-- Update : /api/recipes/<ID>/update 
+- Update : /api/recipes/\<PK\>/update 
 - List : /api/recipes/ 
-- Delete : /api/recipes/<ID>/delete 
+- Delete : /api/recipes/\<PK\>/delete 
 
 ## Testing
 - Run python manage.py test api.tests # Run test
