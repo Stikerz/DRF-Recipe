@@ -45,49 +45,21 @@ class RecipeSerializer(ModelSerializer):
         return recipe_instance
 
     def update(self, instance, validated_data):
-        instance.title = validated_data['name']
+        instance.name = validated_data['name']
+        instance.save()
+
         recipe_ingredients = validated_data['recipe_ingredients']
         recipe_steps = validated_data['recipe_steps']
-        instance.save()
+
         ingredient = instance.recipe_ingredients.all()
         ingredient.delete()
-        instruction = instance.recipe_steps.all()
-        instruction.delete()
+
+        step = instance.recipe_steps.all()
+        step.delete()
+
         for ingrediants in recipe_ingredients:
             Ingredient.objects.get_or_create(recipe=instance, **ingrediants)
         for step in recipe_steps:
             Step.objects.create(recipe=instance, **step)
+            
         return instance
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
-# {
-#     "user": {
-#         "username": "admin"
-#     },
-#     "name": "dfdf",
-#     "recipe_ingredients": [{
-#                 "text": "Chicken"
-#             },
-#             {
-#                 "text": "Flour"
-#             }],
-#     "recipe_steps": [{
-#                 "step_text": "clean chicken"
-#             },
-#             {
-#                 "step_text": "fry chicken"
-#             }]
-# }
